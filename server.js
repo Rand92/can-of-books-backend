@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 
 mongoose.connect(`mongodb://localhost:27017/bookstore`,{useNewUrlParser: true, useUnifiedTopology: true});
 
-app.get('/controller',bookController);
+app.get('/allBooks',bookController);
 // app.get('/getbook',getbooks);
 
 
