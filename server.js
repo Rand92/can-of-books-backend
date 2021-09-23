@@ -9,28 +9,26 @@ const mongoose = require('mongoose')
 const PORT = process.env.PORT
 const MONGO_SERVER = process.env.MONGO_SERVER
 const {bookController,getbooks} =require("./controller/RandBookControllerr")
-
-
-const {seedbook} = require("./models/RandBooks")
-// const {seedAuthor} = require("./models/author.model")
-// const {authorcontroller ,getauthorcontroller} = require("./contrellor/author.contrellor")
-
+const {seedbook,createBook,deleteBook,updateBook} = require("./models/RandBooks")
+app.use(express.json())
+const MONGO_URL =process.env.MONGO_URL;
 
 app.get('/seed_data',(req,res)=>{
-    seedbook()
-    res.json('Hello from seed data')
+    res.json(seedbook())
 })
 
+// app.get("/", (req, res) => {
+//     res.status(200).json({ message: "I'm working" });
+//   });
 
-app.get("/", (req, res) => {
-    res.status(200).json({ message: "I'm working" });
-  });
+mongoose.connect(`${MONGO_SERVER}/bookstore`,{useNewUrlParser: true, useUnifiedTopology: true});
 
-mongoose.connect(`mongodb://localhost:27017/bookstore`,{useNewUrlParser: true, useUnifiedTopology: true});
 
 app.get('/allBooks',bookController);
-// app.get('/getbook',getbooks);
-
+app.get('/getbook',getbooks);
+app.post("/addBook",createBook);
+app.delete('/delete-book/:id',deleteBook);
+app.put('/update-book/:id',updateBook);
 
 app.listen(PORT, () => {
     console.log(`listening to port ${PORT}`);
