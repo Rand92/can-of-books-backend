@@ -14,5 +14,5 @@ let getbooks= (req,res)=>{
     })  
     
 }
-
+//*called seed-data then allBooks in the thunder.
 module.exports = {bookController , getbooks};
