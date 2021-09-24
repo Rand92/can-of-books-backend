@@ -12,7 +12,6 @@ const {bookController,getbooks} =require("./controller/RandBookControllerr")
 const {seedbook,createBook,deleteBook,updateBook} = require("./models/RandBooks")
 app.use(express.json())
 const MONGO_URL =process.env.MONGO_URL;
-
 app.get('/seed_data',(req,res)=>{
     res.json(seedbook())
 })
@@ -21,7 +20,7 @@ app.get('/seed_data',(req,res)=>{
 //     res.status(200).json({ message: "I'm working" });
 //   });
 
-mongoose.connect(`${MONGO_SERVER}/bookstore`,{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(`${MONGO_URL}/bookstore`,{useNewUrlParser: true, useUnifiedTopology: true});
 
 
 app.get('/allBooks',bookController);
